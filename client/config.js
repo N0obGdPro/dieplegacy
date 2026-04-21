@@ -21,9 +21,10 @@ const CDN = "https://static.diep.io/";
 const API_URL = `${window.location.href}api/`;
 
 const CHANGELOG = [
+    "Diep.io: Legacy Reborn v0.0.1 - Public Alpha",
     "Updated recently",
     "",
-    "Released Game but this is ALPHA!",
+    "Released Game",
     "Join our Discord server in button bottom right :)"
 ];
 
