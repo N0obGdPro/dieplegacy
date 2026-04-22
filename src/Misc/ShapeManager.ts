@@ -82,7 +82,7 @@ export default class ShapeManager {
         } else {
             // Fields of Shapes
             const rand = Math.random();
-            if (rand < .02) {
+            if (rand < .001) {
                 shape = new Hexagon(this.game);
     
                 shape.positionData.values.x = x;
