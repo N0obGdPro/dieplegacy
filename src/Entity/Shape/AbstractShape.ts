@@ -22,7 +22,7 @@ import LivingEntity from "../Live";
 
 import { Entity } from "../../Native/Entity";
 import { Color, PositionFlags, NameFlags, EntityTags } from "../../Const/Enums";
-import { NameGroup } from "../../Native/FieldGroups";
+import { NameGroup, ScoreGroup } from "../../Native/FieldGroups";
 import { AI } from "../AI";
 import { normalizeAngle, PI2 } from "../../util";
 
@@ -46,6 +46,8 @@ export default class AbstractShape extends LivingEntity {
 
     /** Always existant name field group, present in all shapes. */
     public nameData: NameGroup = new NameGroup(this);
+    /** Used to make the scoredata for the as */
+    public scoreData: ScoreGroup = new ScoreGroup(this)
     /** If the shape is shiny or not */
     public isShiny: boolean = false;
 
@@ -92,7 +94,17 @@ export default class AbstractShape extends LivingEntity {
         this.isTurning = TURN_TIMEOUT;
     }
 
+    public onKill(killedEntity: LivingEntity) {
+        if (killedEntity.scoreData instanceof ScoreGroup) {
+          this.scoreReward += killedEntity.scoreData.values.score;
+          this.scoreData.score = this.scoreReward;
+        }
+    }
+
     public tick(tick: number) {
+
+        this.scoreData.values.score = this.scoreReward;
+        
         if (!this.doIdleRotate) {
             return super.tick(tick);
         }
