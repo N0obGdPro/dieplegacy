@@ -60,31 +60,31 @@ export default class ShapeManager {
         const leftX = this.arena.arenaData.values.leftX;
         if (Math.max(x, y) < rightX / 10 && Math.min(x, y) > leftX / 10) {
             const rand = Math.random();
-            if (rand < .05) {
+            if (rand < .50) {
                 shape = new Decagon(this.game);
     
                 shape.positionData.values.x = x;
                 shape.positionData.values.y = y;
                 shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
-            } else if (rand < .10) {
+            } else if (rand < .60) {
                 shape = new Nonagon(this.game);
     
                 shape.positionData.values.x = x;
                 shape.positionData.values.y = y;
                 shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
-            } else if (rand < .20) {
+            } else if (rand < .70) {
                 shape = new Octagon(this.game);
     
                 shape.positionData.values.x = x;
                 shape.positionData.values.y = y;
                 shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
-            } else if (rand < .30) {
+            } else if (rand < .80) {
                 shape = new Heptagon(this.game);
     
                 shape.positionData.values.x = x;
                 shape.positionData.values.y = y;
                 shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
-            } else if (rand < .50) {
+            } else if (rand < .90) {
                 shape = new Hexagon(this.game);
     
                 shape.positionData.values.x = x;
