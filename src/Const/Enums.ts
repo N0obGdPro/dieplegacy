@@ -44,7 +44,10 @@ export const enum Color {
     kMaxColors = 18,
     
     EnemyHexagon = 19,
-    EnemyOctogon = 20
+    EnemyHeptagon = 20,
+    EnemyOctagon = 21,
+    EnemyNonagon = 22,
+    EnemyDecagon = 23
 }
 
 /**
@@ -72,7 +75,10 @@ export const ColorsHexCode: Record<Color, number> = {
     [Color.kMaxColors]: 0x000000,
     
     [Color.EnemyHexagon]: 0x35C5DB,
-    [Color.EnemyOctogon]: 0x28a170
+    [Color.EnemyHeptagon]: 0x9C66FF,
+    [Color.EnemyOctagon]: 0xD68064,
+    [Color.EnemyNonagon]: 0xFCB07A,
+    [Color.EnemyDecagon]: 0xFFE869
 }
 
 /**
