@@ -20,6 +20,10 @@ import ArenaEntity from "../Native/Arena";
 import GameServer from "../Game";
 
 import Crasher from "../Entity/Shape/Crasher";
+import Decagon from "../Entity/Shape/Decagon";
+import Nonagon from "../Entity/Shape/Nonagon";
+import Octagon from "../Entity/Shape/Octagon";
+import Heptagon from "../Entity/Shape/Heptagon";
 import Hexagon from "../Entity/Shape/Hexagon";
 import Pentagon from "../Entity/Shape/Pentagon";
 import Triangle from "../Entity/Shape/Triangle";
@@ -56,7 +60,31 @@ export default class ShapeManager {
         const leftX = this.arena.arenaData.values.leftX;
         if (Math.max(x, y) < rightX / 10 && Math.min(x, y) > leftX / 10) {
             const rand = Math.random();
-            if (rand < .20) {
+            if (rand < .001) {
+                shape = new Decagon(this.game);
+    
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+            } else if (rand < .003) {
+                shape = new Nonagon(this.game);
+    
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+            } else if (rand < .015) {
+                shape = new Octagon(this.game);
+    
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+            } else if (rand < .04) {
+                shape = new Heptagon(this.game);
+    
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+            } else if (rand < .20) {
                 shape = new Hexagon(this.game);
     
                 shape.positionData.values.x = x;
