@@ -29,10 +29,10 @@ export default class Square extends AbstractShape {
     protected static BASE_ORBIT = AbstractShape.BASE_ORBIT / 2;
     protected static BASE_VELOCITY = AbstractShape.BASE_VELOCITY / 2;
     
-    public constructor(game: GameServer, isAlpha=false, alpha=(Math.random() < 0.075), shiny=(Math.random() < 0.01) && !isAlpha) {
+    public constructor(game: GameServer, isAlpha=false, alpha=(Math.random() < 0.075), shiny=(Math.random() < 0.001) && !isAlpha) {
 
         if (alpha) {
-          isAlpha = true;
+          //isAlpha = true;
         }
 
         super(game);
