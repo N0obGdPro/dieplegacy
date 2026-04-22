@@ -19,8 +19,7 @@
 import GameServer from "../../Game";
 import AbstractShape from "./AbstractShape";
 
-import { Color, EntityTags } from "../../Const/Enums";
-import { shinyChance } from "../../config";
+import { Color, NameFlags } from "../../Const/Enums";
 
 /**
  * Pentagon entity class.
@@ -33,7 +32,7 @@ export default class Pentagon extends AbstractShape {
     protected static BASE_ORBIT = AbstractShape.BASE_ORBIT / 2;
     protected static BASE_VELOCITY = AbstractShape.BASE_VELOCITY / 2;
 
-    public constructor(game: GameServer, isAlpha=false, shiny=(Math.random() < shinyChance) && !isAlpha) {
+    public constructor(game: GameServer, isAlpha=false, shiny=(Math.random() < 0.001) && !isAlpha) {
         super(game);
         
         this.nameData.values.name = isAlpha ? "Alpha Pentagon" : "Pentagon";
@@ -48,16 +47,16 @@ export default class Pentagon extends AbstractShape {
 
         this.isAlpha = isAlpha;
         this.isShiny = shiny;
-
-        this.damagePerTick = isAlpha ? 5 : 3;
+    
+        this.damagePerTick = isAlpha ? 20 : 12;
         this.scoreReward = isAlpha ? 3000 : 130;
+
+        if (isAlpha) // Show name UI for alpha pentagons
+		this.nameData.values.flags ^= NameFlags.hiddenName;
         
         if (shiny) {
             this.scoreReward *= 100;
             this.healthData.values.health = this.healthData.values.maxHealth *= 10;
-            this.entityTags |= EntityTags.isShiny;
         }
-
-        this.arenaMobID = this.isAlpha ? "alphaPentagon" : "pentagon";
     }
 }
