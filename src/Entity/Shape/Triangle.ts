@@ -19,29 +19,39 @@
 import GameServer from "../../Game";
 import AbstractShape from "./AbstractShape";
 
-import { Color, EntityTags } from "../../Const/Enums";
-import { shinyChance } from "../../config";
+import { Color, NameFlags } from "../../Const/Enums";
 
 export default class Triangle extends AbstractShape {
-    public constructor(game: GameServer, shiny=Math.random() < shinyChance) {
+    
+     public isAlpha: boolean;
+
+    protected static BASE_ROTATION = AbstractShape.BASE_ROTATION / 2;
+    protected static BASE_ORBIT = AbstractShape.BASE_ORBIT / 2;
+    protected static BASE_VELOCITY = AbstractShape.BASE_VELOCITY / 2;
+    
+    public constructor(game: GameServer, isAlpha=false, alpha=(Math.random() < 0.075), shiny=(Math.random() < 0.01) && !isAlpha) {
+
+        if (alpha) {
+          isAlpha = true;
+        }
+        
         super(game);
         
-        this.nameData.values.name = "Triangle";
-        this.healthData.values.health = this.healthData.values.maxHealth = 30;
-        this.physicsData.values.size = 55 * Math.SQRT1_2;
+        this.nameData.values.name = isAlpha ? "Alpha Triangle" : "Triangle";
+        this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 1500 : 30);
+        this.physicsData.values.size = (isAlpha ? 125 : 55) * Math.SQRT1_2;
         this.physicsData.values.sides = 3;
         this.styleData.values.color = shiny ? Color.Shiny : Color.EnemyTriangle;
-
-        this.damagePerTick = 2;
-        this.scoreReward = 25;
+        this.physicsData.values.absorbtionFactor = isAlpha ? 0.05 : 0.5;
+        this.damagePerTick = 8;
+        this.scoreReward = (isAlpha ? 1500 : 25);
         this.isShiny = shiny;
-
+        this.isAlpha = isAlpha;
+          if (isAlpha) // Show name UI for alpha pentagons
+		this.nameData.values.flags ^= NameFlags.hiddenName;
         if (shiny) {
             this.scoreReward *= 100;
             this.healthData.values.health = this.healthData.values.maxHealth *= 10;
-            this.entityTags |= EntityTags.isShiny;
         }
-
-        this.arenaMobID = "triangle";
     }
 }
