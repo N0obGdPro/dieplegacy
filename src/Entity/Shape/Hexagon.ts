@@ -47,7 +47,7 @@ export default class Hexagon extends AbstractShape {
         this.physicsData.values.sides = 6;
         this.styleData.values.color = shiny ? Color.Shiny : Color.EnemyHexagon;
 
-        this.physicsData.values.absorbtionFactor = isAlpha ? 0.05 : 0.5;
+        this.physicsData.values.absorbtionFactor = isAlpha ? 0.05 : 0.25;
         this.physicsData.values.pushFactor = 11;
 
         this.isAlpha = isAlpha;
