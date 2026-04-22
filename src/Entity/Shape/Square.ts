@@ -19,29 +19,38 @@
 import GameServer from "../../Game";
 import AbstractShape from "./AbstractShape";
 
-import { Color, EntityTags } from "../../Const/Enums";
-import { shinyChance } from "../../config";
+import { Color, NameFlags } from "../../Const/Enums";
 
 export default class Square extends AbstractShape {
-    public constructor(game: GameServer, shiny=Math.random() < shinyChance) {
-        super(game);
 
-        this.nameData.values.name = "Square";
-        this.healthData.values.health = this.healthData.values.maxHealth = 10;
-        this.physicsData.values.size = 55 * Math.SQRT1_2;
+    public isAlpha: boolean;
+
+    protected static BASE_ROTATION = AbstractShape.BASE_ROTATION / 2;
+    protected static BASE_ORBIT = AbstractShape.BASE_ORBIT / 2;
+    protected static BASE_VELOCITY = AbstractShape.BASE_VELOCITY / 2;
+    
+    public constructor(game: GameServer, isAlpha=false, alpha=(Math.random() < 0.075), shiny=(Math.random() < 0.01) && !isAlpha) {
+
+        if (alpha) {
+          isAlpha = true;
+        }
+
+        super(game);
+        this.nameData.values.name = isAlpha ? "Alpha Square" : "Square";
+        this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 100 : 10);
+        this.physicsData.values.size = (isAlpha ? 105 : 55) * Math.SQRT1_2;
         this.physicsData.values.sides = 4;
         this.styleData.values.color = shiny ? Color.Shiny : Color.EnemySquare;
-
-        this.damagePerTick = 2;
-        this.scoreReward = 10;
+        this.physicsData.values.absorbtionFactor = isAlpha ? 0.05 : 0.5;
+        this.damagePerTick = isAlpha ? 12 : 8;
+        this.scoreReward = isAlpha ? 500 : 10;
+        this.isAlpha = isAlpha;
         this.isShiny = shiny;
-
+  if (isAlpha) // Show name UI for alpha pentagons
+		this.nameData.values.flags ^= NameFlags.hiddenName;
         if (shiny) {
             this.scoreReward *= 100;
             this.healthData.values.health = this.healthData.values.maxHealth *= 10;
-            this.entityTags |= EntityTags.isShiny;
         }
-        
-        this.arenaMobID = "square";
     }
 }
