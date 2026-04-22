@@ -164,13 +164,13 @@ app.listen(PORT, (success) => {
     const ffa = new GameServer(FFAArena, "FFA");
     //const t2 = new GameServer(T2Arena, "2 Teams");
     //const t4 = new GameServer(T4Arena, "4 Teams");
-    const maze = new GameServer(MazeArena, "Maze");
+    //const maze = new GameServer(MazeArena, "Maze");
     const dom = new GameServer(DomArena, "Domination");
     //const tam = new GameServer(TagArena, "Tag Mode");
-    const mos = new GameServer(MoSArena, "Mothership");
+    //const mos = new GameServer(MoSArena, "Mothership");
     const sbx = new GameServer(SandboxArena, "Sandbox");
     
-    games.push(ffa, maze, dom, mos, sbx);
+    games.push(ffa, dom, sbx);
 
     util.saveToLog("Servers up", "All servers booted up.", 0x37F554);
     util.log("Dumping endpoint -> gamemode routing table");
