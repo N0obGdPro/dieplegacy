@@ -44,7 +44,7 @@ export default class Hexagon extends AbstractShape {
 
         this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 10000 : 1500);
         this.physicsData.values.size = (isAlpha ? 175 : 100) * Math.SQRT1_2;
-        this.physicsData.values.sides = (isAlpha ? 8 : 6);
+        this.physicsData.values.sides = 6;
         this.styleData.values.color = shiny ? Color.Shiny : Color.EnemyHexagon;
 
         this.physicsData.values.absorbtionFactor = isAlpha ? 0.05 : 0.5;
