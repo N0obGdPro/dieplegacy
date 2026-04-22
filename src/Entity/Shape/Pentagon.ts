@@ -51,8 +51,8 @@ export default class Pentagon extends AbstractShape {
         this.damagePerTick = isAlpha ? 20 : 12;
         this.scoreReward = isAlpha ? 3000 : 130;
 
-        if (isAlpha) // Show name UI for alpha pentagons
-		this.nameData.values.flags ^= NameFlags.hiddenName;
+        //if (isAlpha) // Show name UI for alpha pentagons
+		//this.nameData.values.flags ^= NameFlags.hiddenName;
         
         if (shiny) {
             this.scoreReward *= 100;
