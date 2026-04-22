@@ -20,6 +20,7 @@ import ArenaEntity from "../Native/Arena";
 import GameServer from "../Game";
 
 import Crasher from "../Entity/Shape/Crasher";
+import Hexagon from "../Entity/Shape/Hexagon";
 import Pentagon from "../Entity/Shape/Pentagon";
 import Triangle from "../Entity/Shape/Triangle";
 import Square from "../Entity/Shape/Square";
@@ -54,12 +55,21 @@ export default class ShapeManager {
         const rightX = this.arena.arenaData.values.rightX;
         const leftX = this.arena.arenaData.values.leftX;
         if (Math.max(x, y) < rightX / 10 && Math.min(x, y) > leftX / 10) {
-            // Pentagon Nest
-            shape = new Pentagon(this.game, Math.random() <= 0.05);
+            const rand = Math.random();
+            if (rand < .20) {
+                shape = new Hexagon(this.game);
+    
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+            } else {
+                // Pentagon Nest
+                shape = new Pentagon(this.game, Math.random() <= 0.05);
 
-            shape.positionData.values.x = x;
-            shape.positionData.values.y = y;
-            shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+            }
         } else if (Math.max(x, y) < rightX / 5 && Math.min(x, y) > leftX / 5) {
             // Crasher Zone
             const isBig = Math.random() < .2;
@@ -72,7 +82,13 @@ export default class ShapeManager {
         } else {
             // Fields of Shapes
             const rand = Math.random();
-            if (rand < .04) {
+            if (rand < .02) {
+                shape = new Hexagon(this.game);
+    
+                shape.positionData.values.x = x;
+                shape.positionData.values.y = y;
+                shape.relationsData.values.owner = shape.relationsData.values.team = this.arena;
+            } else if (rand < .04) {
                 shape = new Pentagon(this.game);
 
                 shape.positionData.values.x = x;
